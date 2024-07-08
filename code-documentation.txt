@@ -1,0 +1,49 @@
+CODE SUMMARY
+    This implementation performs set operations (complement, union, intersection, difference, and exclusive OR) on sets A and B using an efficient bitstring representation. The following steps are taken:
+    1. Allocate memory for both Set A and B.
+    2. Allocate a memory for universal set and initialize it.
+        - Maximum size is 10, sufficient to store integer values from 1 to 10.
+        - Initialization takes place in function: int* initialize_universal_set();
+    3. Take and store inputs for Set A and B.
+        - Maximum no. of elements is 10 for both sets. 
+        - Each input should not exceed the values from universal set.
+        - Taking inputs takes place in function: int* take_inputs()
+    4. Count the elements of each set in order to determine their sizes.
+        - Counting takes place in function: int count_elements(int *set);
+    5. Convert each set into bit strings based on universal set.
+        - Conversion takes place in function: uint64_t convert_to_bitstring(int *set, int *uSet, int size); 
+        - bit=bit|(1ULL<<(uSet[i]-1))
+            = bit is initialized to 0, so that, it will look like this (00000000 ... 00000000)
+            = 1ULL is used to represent 1 as a long long integer. In binary, this would look like this (00000000 ... 00000001)
+            = (uSet[i]-1) is used to locate the bit position in universal set where the element is present from a certain set
+            = So this line of code, (1ULL<<(uSet[i]-1)), allows shifting (uSet[i]-1) bits into the left from being (00000000 ... 00000001)
+            = Finally, bit|(1ULL<<(uSet[i]-1)), is used to combine and update bit through the help of OR (|) bitwise operator. Since OR operator is can be treated like addition.
+                ==e.g. 10101010 | 01010101 = 11111111
+    6. Create uint64_t variables that would hold bits for each result for the following:
+        - Complement of Set A and B
+        - Union of Set A and B
+        - Intersection of Set A and B 
+        - Set Difference of Set A and B, and vice versa
+        - Exclusive OR of Set A and B 
+    7. Lastly, print all the results.
+        - Displaying of values takes place in function: void display_result(uint64_t bits, int *uSet);
+    8. Memory Deallocation
+
+PROGRAM LIMITATION
+    1. The UNIVERSAL_SIZE is fixed at 10. This means the code can only work with sets containing elements within the range of 1 to 10.
+    2. Limited error handling, particularly in taking inputs.
+    3. User has no freedom in inputting specific universal elements based on their case.
+
+DEVELOPER'S RECOMMENDATION: A ROOM FOR FUTURE IMPROVEMENTS
+    1. Employ a larger size of universal set that could cover possible elements, including negative integers and real numbers. (Larger Bitstring Representation)
+    2. Consider allowing users to enter specific elements of universal set. (Dynamic Universal Set)
+    3. Improve error handling
+.
+.
+.
+.
+.
+.
+.
+Date Created: July 8, 2024
+Created by: Ken Cedrick A. Jimeno
